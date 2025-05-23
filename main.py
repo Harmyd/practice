@@ -39,7 +39,7 @@ def create_student(request:schemas.Student,db:Session=Depends(get_db)):
         db.rollback()
         raise HTTPException(status_code=400, detail=str(e))
 
-@app.get("/students",status_code=status.HTTP_200_OK)
+@app.get("/get_students",status_code=status.HTTP_200_OK)
 def get_all(db:Session=Depends(get_db)):
     try:
         students=db.query(models.Student).all()
