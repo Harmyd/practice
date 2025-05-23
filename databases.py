@@ -2,10 +2,11 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import Session
+import os
 
 
-# SQLite database URL
-DATABASE_URL = "postgresql://postgres:#Hamid2345#*@db.mjjftecmbhuncnfgbddn.supabase.co:5432/postgres"
+# Postgre database URL
+DATABASE_URL = os.environ.get("Database_url")
 # Create the SQLAlchemy engine
 # Create a db engine
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
