@@ -9,7 +9,7 @@ import os
 DATABASE_URL = os.environ.get("Database_url")
 # Create the SQLAlchemy engine
 # Create a db engine
-engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
+engine = create_engine(DATABASE_URL)
 # Create a configured "Session" class
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 # Create a base class for declarative models
