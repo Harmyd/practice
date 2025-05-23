@@ -22,7 +22,7 @@ port=int(os.environ.get("PORT", "8000"))
 def show():
     return {"data": "Hi there"}
 
-@app.post("/students",status_code=status.HTTP_201_CREATED)
+@app.post("/create_students",status_code=status.HTTP_201_CREATED)
 def create_student(request:schemas.Student,db:Session=Depends(get_db)):
     try:
         new_student=models.Student(
@@ -37,6 +37,14 @@ def create_student(request:schemas.Student,db:Session=Depends(get_db)):
         return new_student
     except Exception as e:
         db.rollback()
+        raise HTTPException(status_code=400, detail=str(e))
+
+@app.get("/students",status_code=status.HTTP_200_OK)
+def get_all(db:Session=Depends(get_db)):
+    try:
+        students=db.query(models.Student).all()
+        return students
+    except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
     
 if __name__ == "__main__":
