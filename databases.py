@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 
 
 # SQLite database URL
-DATABASE_URL = "sqlite:///./test.db"
+DATABASE_URL = "postgresql://postgres:#Hamid2345#*@db.mjjftecmbhuncnfgbddn.supabase.co:5432/postgres"
 # Create the SQLAlchemy engine
 # Create a db engine
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
