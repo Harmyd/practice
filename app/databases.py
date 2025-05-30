@@ -6,7 +6,7 @@ import os
 
 
 # Postgre database URL
-DATABASE_URL = "postgresql://hamid:VFPlRcEMnYa0pveS6IIsIWFWsGJcOfK9@dpg-d0ocf1be5dus73auola0-a.oregon-postgres.render.com/studentdb_m113"
+DATABASE_URL = "postgresql://hamid:0D2iHiaYlbzyMPmnbKR785U1pPd3tmrT@dpg-d0sosdjuibrs73al5e70-a.oregon-postgres.render.com/pracdb"
 # Create the SQLAlchemy engine
 # Create a db engine
 engine = create_engine(DATABASE_URL)

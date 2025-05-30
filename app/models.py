@@ -2,10 +2,10 @@ from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from databases import Base
 
-class Student(Base):
+class User(Base):
     __tablename__ = "students"
     id = Column(Integer, primary_key=True, index=True)
-    Name = Column(String, index=True)
-    Age = Column(Integer)
-    Department = Column(String)
-    MatricNo = Column(String, unique=True, index=True)  
+    FirstName = Column(String)
+    Email = Column(String,unique=True,index=True)
+    Username = Column(String,unique=True,index=True)
+    Password = Column(String)  
