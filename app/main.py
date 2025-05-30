@@ -2,7 +2,7 @@ from fastapi import FastAPI,status,HTTPException, Depends
 from .models import Base
 from .databases import engine
 from fastapi.middleware.cors import CORSMiddleware
-from .Routes import Sign_up_route
+from .Routes import Sign_up_route,login_route
 import os
 app=FastAPI()
 
@@ -25,6 +25,7 @@ def show():
 
 
 app.include_router(Sign_up_route.Sign_up_Router)
+app.include_router(login_route.Login_route)
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=port)
