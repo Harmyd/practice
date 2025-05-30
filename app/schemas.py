@@ -5,7 +5,7 @@ class User(BaseModel):
     Username:str
     Password:str
 
-class UserOut(BaseException):
+class UserOut(BaseModel):
     FirstName:str
     Email:str
     Username:str
