@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from .databases import Base
 
-class User(Base):
+class User_detail(Base):
     __tablename__ = "students"
     id = Column(Integer, primary_key=True, index=True)
     FirstName = Column(String)
