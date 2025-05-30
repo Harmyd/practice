@@ -15,7 +15,7 @@ def signUp(request,db:Session):
         raise HTTPException(status_code=status.HTTP_409_CONFLICT,detail="Email already exist")
     else:
         try:
-            new_user=User_detail(Firstname=request.Firstname,Email=request.Email,Username=request.Username,Password=Hash.hash_password(request.Password))
+            new_user=User_detail(FirstName=request.Firstname,Email=request.Email,Username=request.Username,Password=Hash.hash_password(request.Password))
             db.add(new_user)
             db.commit()
             db.refresh(new_user)
