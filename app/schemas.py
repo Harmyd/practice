@@ -12,3 +12,7 @@ class UserOut(BaseModel):
 
     class Config:
         orm_mode=True
+
+class loginInSch(BaseModel):
+    Username:str
+    Password:str
