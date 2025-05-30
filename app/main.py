@@ -1,6 +1,6 @@
 from fastapi import FastAPI,status,HTTPException, Depends
 from .models import Base
-from databases import get_db,engine,Session
+from .databases import engine
 from fastapi.middleware.cors import CORSMiddleware
 from .Routes import Sign_up_route
 import os
