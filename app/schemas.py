@@ -6,9 +6,9 @@ class User(BaseModel):
     Password:str
 
 class UserOut(BaseException):
-    Firstname:str
+    FirstName:str
     Email:str
-    username:str
+    Username:str
 
-    class config():
+    class Config:
         orm_mode=True
