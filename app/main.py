@@ -1,5 +1,5 @@
 from fastapi import FastAPI,status,HTTPException, Depends
-import models,databases,schemas
+from .models import Base
 from databases import get_db,engine,Session
 from fastapi.middleware.cors import CORSMiddleware
 from .Routes import Sign_up_route
@@ -15,7 +15,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-models.Base.metadata.create_all(engine)
+Base.metadata.create_all(engine)
 
 port=int(os.environ.get("PORT", "8000"))
 
