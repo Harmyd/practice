@@ -8,5 +8,5 @@ Login_route=APIRouter(
     prefix="/login"
 )
 @Login_route.post("/",status_code=status.HTTP_200_OK)
-def login(request:loginInSch,db:Session=Depends(get_db)):
+def loginIn(request:loginInSch,db:Session=Depends(get_db)):
     return login.login_user(request,db)
