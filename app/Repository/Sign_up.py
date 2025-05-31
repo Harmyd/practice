@@ -3,16 +3,19 @@ from ..models import User_detail
 from ..databases import Session
 from ..schemas import User
 from ..hash import Hash
+from fastapi.responses import PlainTextResponse
 
 def signUp(request,db:Session):
-    Username=request.Username.strip().lower()
+    Username=request.Username.strip()
     Email=request.Email.strip().lower()
     username_check=db.query(User_detail).filter(User_detail.Username==Username).first()
     Email_check=db.query(User_detail).filter(User_detail.Email==Email).first()
     if username_check:
-        raise HTTPException(status_code=status.HTTP_409_CONFLICT,detail="Username already exist")
+        return PlainTextResponse("Username already exist",status_code=status.HTTP_409_CONFLICT)
+        #raise HTTPException(status_code=status.HTTP_409_CONFLICT,detail="Username already exist")
     elif Email_check:
-        raise HTTPException(status_code=status.HTTP_409_CONFLICT,detail="Email already exist")
+        return PlainTextResponse("Email already exist",status_code=status.HTTP_409_CONFLICT)
+        #raise HTTPException(status_code=status.HTTP_409_CONFLICT,detail="Email already exist")
     else:
         try:
             new_user=User_detail(FirstName=request.Firstname,Email=request.Email,Username=request.Username,Password=Hash.hash_password(request.Password))
