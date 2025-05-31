@@ -16,7 +16,7 @@ def login_user(request,db:Session):
         return PlainTextResponse("Wrong Password",status_code=status.HTTP_401_UNAUTHORIZED)
         #raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Wrong Password")
     else:
-        return "Login Successful"
+        return PlainTextResponse("Login Successful")
         #return {
          #   "message":"Login Successful",
           #  "user_id":user.id,
