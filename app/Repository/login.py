@@ -4,9 +4,15 @@ from ..models import User_detail
 from ..hash import Hash
 
 def login_user(request,db:Session):
-    user=db.query(User_detail).filter(User_detail.Username==request.Username).first()
-
-    if not user or not Hash.verify_hash(request.Password,user.Password):
-        return HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Invalid Credentials")
+    username=request.Username.strip().lower()
+    user=db.query(User_detail).filter(User_detail.Username==username).first()
+    if not user :
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="User Not Found")
+    elif not Hash.verify_hash(request.Password,user.Password):
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Wrong Password")
     else:
-        return "Logged_in"
+        return {
+            "message":"Login Successful",
+            "user_id":user.id,
+            "username":user.Username
+        }
