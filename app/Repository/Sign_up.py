@@ -11,10 +11,10 @@ def signUp(request,db:Session):
     username_check=db.query(User_detail).filter(User_detail.Username==Username).first()
     Email_check=db.query(User_detail).filter(User_detail.Email==Email).first()
     if username_check:
-        return PlainTextResponse("Username already exist",status_code=status.HTTP_409_CONFLICT)
+        return {"message":"username already exist"}
         #raise HTTPException(status_code=status.HTTP_409_CONFLICT,detail="Username already exist")
     elif Email_check:
-        return PlainTextResponse("Email already exist",status_code=status.HTTP_409_CONFLICT)
+        return {"message":"email already exist"}
         #raise HTTPException(status_code=status.HTTP_409_CONFLICT,detail="Email already exist")
     else:
         try:
