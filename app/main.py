@@ -23,7 +23,6 @@ port=int(os.environ.get("PORT", "8000"))
 def show():
     return {"data": "Hi there"}
 
-
 app.include_router(Sign_up_route.Sign_up_Router)
 app.include_router(login_route.Login_route)
 if __name__ == "__main__":
