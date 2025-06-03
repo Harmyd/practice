@@ -4,7 +4,7 @@ from .. import Token
 from ..models import User_detail
 from ..hash import Hash
 from sqlalchemy import func
-#from fastapi.responses import PlainTextResponse
+from fastapi.responses import PlainTextResponse
 
 
 def login_user(request,db:Session):
@@ -17,10 +17,7 @@ def login_user(request,db:Session):
         #return {"message":"Wrong Password"}
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Wrong Password")
     else:
-        return {"message":"Login Successful",
-                "user_id":user.id,
-                "user_name":user.Username
-                }
+        return PlainTextResponse("Login_successful",status_code=status.HTTP_200_OK)
         
 
       
