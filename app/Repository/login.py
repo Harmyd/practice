@@ -10,7 +10,7 @@ from fastapi.responses import JSONResponse
 def login_user(request,db:Session):
     username=request.Username.strip().lower()
     user=db.query(User_detail).filter(func.lower(User_detail.Username)==username).first()
-    if not user :
+    if not user:
         return JSONResponse(
             status_code=status.HTTP_404_NOT_FOUND,
             content={"message":"user not found"}
@@ -19,7 +19,7 @@ def login_user(request,db:Session):
     elif not Hash.verify_hash(request.Password,user.Password):
         return JSONResponse(
             status_code=status.HTTP_404_NOT_FOUND,
-            content={"wrong password"}
+            content={"message":"wrong password"}
         )
         #raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Wrong Password")
     else:
