@@ -12,18 +12,21 @@ def login_user(request,db:Session):
     user=db.query(User_detail).filter(func.lower(User_detail.Username)==username).first()
     if not user:
         return JSONResponse(
-            status_code=status.HTTP_404_NOT_FOUND,
-            content={"message":"user not found"}
+            content={"message":"user not found"},
+            status_code=status.HTTP_404_NOT_FOUND
+            
         ) 
         #raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="User Not Found")
     elif not Hash.verify_hash(request.Password,user.Password):
         return JSONResponse(
-            status_code=status.HTTP_404_NOT_FOUND,
-            content={"message":"wrong password"}
+            content={"message":"wrong password"},
+            status_code=status.HTTP_404_NOT_FOUND
+            
         )
         #raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail="Wrong Password")
     else:
         return JSONResponse(
+            
             status_code=status.HTTP_200_OK,
             content= {"message":"Login Successful",
                     "user_id":user.id,
