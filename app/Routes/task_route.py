@@ -9,7 +9,8 @@ TaskRoute = APIRouter(
     prefix="/Task"
     )
 
-@TaskRoute.post("/",status_code=status.HTTP_201_CREATED,response_model=TaskOut)
+
+@TaskRoute.post("/add_task",status_code=status.HTTP_201_CREATED,response_model=TaskOut)
 def taskcreate(request:Task,db:Session=Depends(get_db)):
     return Tasks.create_task(request,db)
 
