@@ -16,3 +16,18 @@ class UserOut(BaseModel):
 class loginInSch(BaseModel):
     Username:str
     Password:str
+
+
+#Task Schema
+
+class Task(BaseModel):
+    content:str
+    user_id:int
+
+class TaskOut(BaseModel):
+    content:str
+    
+    class Config:
+        orm_mode=True
+
+

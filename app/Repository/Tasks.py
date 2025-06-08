@@ -1,0 +1,86 @@
+from ..databases import Session
+from ..  import models
+from fastapi import HTTPException,status
+from fastapi.responses import JSONResponse
+from fastapi.encoders import jsonable_encoder
+
+def create_task(request,db:Session):
+    new_task=models.Task(Content=request.content,User_id=request.user_id)
+    db.add(new_task)
+    db.commit()
+    db.refresh(new_task)
+    return JSONResponse(
+        status_code=status.HTTP_201_CREATED,
+        content={"message":"Task Added",
+                 "task_id":new_task.id,
+                 "task":jsonable_encoder(new_task)
+                 }
+    )
+
+
+def get_task_for_user(id,request,db:Session):
+    check_user=db.query(models.User_detail).filter(models.User_detail.id==id).first()
+    if not check_user:
+        return JSONResponse(
+            status_code=status.HTTP_404_NOT_FOUND,
+            content={"message":"User does not exist"}
+        )
+  
+    tasks=db.query(models.Task).filter(models.Task.User_id==id).all()
+    if not tasks:
+        return JSONResponse(
+            status_code=status.HTTP_404_NOT_FOUND,
+            content={"message":"No Task found for this user"}
+        )
+    return JSONResponse(
+        status_code=status.HTTP_200_OK,
+        content={"message":"successfull",
+                "tasks": jsonable_encoder(tasks)}
+    )
+
+
+def edit_task(task_id,request,db:Session):
+    current_task=db.query(models.Task).filter(models.Task.id==task_id).first()
+    
+    if not current_task:
+        return JSONResponse(
+            status_code=status.HTTP_404_NOT_FOUND,
+            content={"message":"task does not exist"}
+        )
+    
+    if request.user_id != current_task.User_id:
+        return JSONResponse(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            content={"message":"This user is not authorized to make changes"}
+        )
+    current_task.Content=request.content
+    db.commit()
+    db.refresh(current_task)
+    return JSONResponse(
+        status_code=status.HTTP_200_OK,
+        content={"message":"updated"}
+    )
+
+
+def delete_task(user_id,task_id,db:Session):
+    task=db.query(models.Task).filter(models.Task.id==task_id).first()
+
+    if not task:
+        return JSONResponse(
+            status_code=status.HTTP_404_NOT_FOUND,
+            content={"message":"task does not exist"}
+        )
+    
+    if user_id != task.User_id:
+        return JSONResponse(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            content={"message":"This user is not authorized to make changes"}
+        )
+    
+    db.delete(task)
+    db.commit()
+    
+    return JSONResponse(
+        status_code=status.HTTP_200_OK,
+        content={"message":"Task deleted"}
+    )
