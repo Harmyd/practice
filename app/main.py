@@ -10,7 +10,8 @@ app=FastAPI()
 
 # CORS
 origin=[
-    "http://localhost:3000"
+    "http://localhost:3000",
+    "https://l6s56sqc-3000.uks1.devtunnels.ms"
 ]
 app.add_middleware(
     CORSMiddleware,
