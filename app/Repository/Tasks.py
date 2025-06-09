@@ -5,15 +5,15 @@ from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 
 def create_task(request,db:Session):
-    new_task=models.Task(Content=request.content,User_id=request.user_id)
-    db.add(new_task)
+    for task in request.Tasks:
+        new_task=models.Task(Content=task.todo,User_id=request.user_id)
+        db.add(new_task)
     db.commit()
     db.refresh(new_task)
     return JSONResponse(
         status_code=status.HTTP_201_CREATED,
         content={"message":"Task Added",
-                 "task_id":new_task.id,
-                 "task":jsonable_encoder(new_task)
+                 "task_id":new_task.id
                  }
     )
 
@@ -53,7 +53,7 @@ def edit_task(task_id,request,db:Session):
             status_code=status.HTTP_401_UNAUTHORIZED,
             content={"message":"This user is not authorized to make changes"}
         )
-    current_task.Content=request.content
+    current_task.Content=request.todo
     db.commit()
     db.refresh(current_task)
     return JSONResponse(

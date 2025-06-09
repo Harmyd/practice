@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import List
 class User(BaseModel):
     Firstname:str
     Email:str
@@ -20,12 +21,19 @@ class loginInSch(BaseModel):
 
 #Task Schema
 
-class Task(BaseModel):
-    content:str
+class task(BaseModel):
+    todo:str
+
+class TaskList(BaseModel):
     user_id:int
+    Tasks:List[task]
+
+class TaskEdit(BaseModel):
+    user_id:int
+    todo:str
 
 class TaskOut(BaseModel):
-    content:str
+    todo:str
     
     class Config:
         orm_mode=True
