@@ -9,13 +9,13 @@ def create_task(request,db:Session):
     for task in request.Tasks:
         new_task=models.Task(Content=task.todo,User_id=request.user_id)
         db.add(new_task)
-    db.commit()
-    db.refresh(new_task)
-    task_dict = {
-        "todo":new_task.Content,
-        "task_id":new_task.id
-    }
-    task_list.append(task_dict)
+        db.commit()
+        db.refresh(new_task)
+        task_dict = {
+            "todo":new_task.Content,
+            "task_id":new_task.id
+        }
+        task_list.append(task_dict)
     return JSONResponse(
         status_code=status.HTTP_201_CREATED,
         content={"message":"Task Added",
