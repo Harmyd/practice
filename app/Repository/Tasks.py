@@ -18,7 +18,7 @@ def create_task(request,db:Session):
     )
 
 
-def get_task_for_user(id,request,db:Session):
+def get_task_for_user(id,db:Session):
     check_user=db.query(models.User_detail).filter(models.User_detail.id==id).first()
     if not check_user:
         return JSONResponse(

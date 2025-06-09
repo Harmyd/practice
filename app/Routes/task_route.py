@@ -15,8 +15,8 @@ def taskcreate(request:Task,db:Session=Depends(get_db)):
     return Tasks.create_task(request,db)
 
 @TaskRoute.get("/{id}",status_code=status.HTTP_200_OK,response_model=TaskOut)
-def get_task(id:int,request:Task,db:Session=Depends(get_db)):
-    return Tasks.get_task_for_user(id,request,db)
+def get_task(id:int,db:Session=Depends(get_db)):
+    return Tasks.get_task_for_user(id,db)
 
 @TaskRoute.put("/update_task/{task_id}",status_code=status.HTTP_200_OK,response_model=TaskOut)
 def update_task(task_id:int,request:Task,db:Session=Depends(get_db)):
