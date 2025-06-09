@@ -5,15 +5,20 @@ from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 
 def create_task(request,db:Session):
+    task_list=[]
     for task in request.Tasks:
         new_task=models.Task(Content=task.todo,User_id=request.user_id)
         db.add(new_task)
     db.commit()
     db.refresh(new_task)
+    task_dict = {
+        "todo":new_task.Content,
+        "task_id":new_task.id
+    }
     return JSONResponse(
         status_code=status.HTTP_201_CREATED,
         content={"message":"Task Added",
-                 "task_id":new_task.id
+                 "tasks":task_list.append(task_dict)
                  }
     )
 
