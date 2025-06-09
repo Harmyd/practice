@@ -15,10 +15,11 @@ def create_task(request,db:Session):
         "todo":new_task.Content,
         "task_id":new_task.id
     }
+    task_list.append(task_dict)
     return JSONResponse(
         status_code=status.HTTP_201_CREATED,
         content={"message":"Task Added",
-                 "tasks":task_list.append(task_dict)
+                 "tasks":task_list
                  }
     )
 
