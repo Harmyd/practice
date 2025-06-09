@@ -18,10 +18,10 @@ def taskcreate(request:Task,db:Session=Depends(get_db)):
 def get_task(id:int,request:Task,db:Session=Depends(get_db)):
     return Tasks.get_task_for_user(id,request,db)
 
-@TaskRoute.put("update_task/{task_id}",status_code=status.HTTP_200_OK,response_model=TaskOut)
+@TaskRoute.put("/update_task/{task_id}",status_code=status.HTTP_200_OK,response_model=TaskOut)
 def update_task(task_id:int,request:Task,db:Session=Depends(get_db)):
     return Tasks.edit_task(task_id,request,db)
 
-@TaskRoute.delete("delete_task/{task_id}",status_code=status.HTTP_200_OK)
+@TaskRoute.delete("/delete_task/{task_id}",status_code=status.HTTP_200_OK)
 def delete_task(task_id:int,user_id:int,db:Session=Depends(get_db)):
     return Tasks.delete_task(user_id,task_id,db)
