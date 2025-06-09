@@ -16,6 +16,6 @@ class Task(Base):
     __tablename__= "tasks"
     id = Column(Integer,primary_key=True,index=True)
     Content=Column(String)
-    User_id = Column(ForeignKey("User_detail.id"))
+    User_id = Column(ForeignKey("students.id"))
 
     user = Relationship("User_detail",back_populates="task")
