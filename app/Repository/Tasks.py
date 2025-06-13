@@ -32,7 +32,7 @@ def get_task_for_user(id,db:Session):
             content={"message":"User does not exist"}
         )
   
-    tasks=db.query(models.Task).filter(models.Task.User_id==id).all()
+    tasks=db.query(models.Task).filter(models.Task.User_id==id).order_by(models.Task.id.asc()).all()
     if not tasks:
         return JSONResponse(
             status_code=status.HTTP_404_NOT_FOUND,
