@@ -28,7 +28,7 @@ def get_task_for_user(id,db:Session):
     check_user=db.query(models.User_detail).filter(models.User_detail.id==id).first()
     if not check_user:
         return JSONResponse(
-            status_code=status.HTTP_404_NOT_FOUND,
+            
             content={"message":"User does not exist"}
         )
   
