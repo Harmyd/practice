@@ -28,14 +28,13 @@ def get_task_for_user(id,db:Session):
     check_user=db.query(models.User_detail).filter(models.User_detail.id==id).first()
     if not check_user:
         return JSONResponse(
-            
+            status_code=status.HTTP_404_NOT_FOUND,
             content={"message":"User does not exist"}
         )
   
     tasks=db.query(models.Task).filter(models.Task.User_id==id).order_by(models.Task.id.asc()).all()
     if not tasks:
         return JSONResponse(
-           
             content={"message":"No Task found for this user"}
         )
     return JSONResponse(

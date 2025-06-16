@@ -26,8 +26,8 @@ def login_user(request,db:Session):
         return JSONResponse(
             status_code=status.HTTP_200_OK,
             content= {"message":"Login Successful",
-                    "user_id":user.id,
-                    "user_name":user.Username
+                      "access_token":Token.create_access_token(data={"user_id":user.id,"username":user.Username}),
+                      "Token_type":"Bearer"
                     }
         )
         
