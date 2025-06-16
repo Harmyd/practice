@@ -25,3 +25,4 @@ def update_task(task_id:int,request:TaskEdit,db:Session=Depends(get_db)):
 @TaskRoute.delete("/delete_task/{task_id}",status_code=status.HTTP_200_OK)
 def delete_task(task_id:int,user_id:int,db:Session=Depends(get_db)):
     return Tasks.delete_task(user_id,task_id,db)
+
