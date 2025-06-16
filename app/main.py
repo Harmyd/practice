@@ -9,13 +9,14 @@ app=FastAPI()
 
 
 # CORS
-#origin=[
-#   "http://localhost:3000",
-#   "https://l6s56sqc-3000.uks1.devtunnels.ms"
-#]
+origin=[
+   "http://localhost:3000",
+   "https://l6s56sqc-3000.uks1.devtunnels.ms",
+   "https://formpractice-two.vercel.app"
+]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[origin],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
