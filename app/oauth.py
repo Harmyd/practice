@@ -2,10 +2,11 @@ from fastapi.security import OAuth2PasswordBearer
 from fastapi import Depends,status
 from fastapi.responses import JSONResponse
 from jose import jwt,JWTError
-from .Config import SECRET_KEY,ALGORITHM
+from .Config import ALGORITHM
 
 
 oauth2_scheme= OAuth2PasswordBearer("https://practice-vdup.onrender.com/login")
+SECRET_KEY="WL2YXpgjYyFue6AL06H7fqxcoQylEk-96UTnb0KpWd0"
 
 def verify_token(token:str = Depends(oauth2_scheme)):
     try:
