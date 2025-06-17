@@ -23,5 +23,6 @@ def verify_token(token:str = Depends(oauth2_scheme)):
     except JWTError as e :
         return JSONResponse(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            content={"message":"Token expired or invalid"}
+            content={"message":"Token expired or invalid"},
+            headers={"WWW-Authenticate": "Bearer"}
         )
