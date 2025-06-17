@@ -27,3 +27,6 @@ def verify_token(token:str = Depends(oauth2_scheme)):
             content={"message":"Token expired or invalid"},
             headers={"WWW-Authenticate": "Bearer"}
         )
+
+#def get_current_user(current_user= Depends(verify_token)):
+    

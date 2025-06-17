@@ -25,11 +25,9 @@ class task(BaseModel):
     todo:str
 
 class TaskList(BaseModel):
-    user_id:int
     Tasks:List[task]
 
 class TaskEdit(BaseModel):
-    user_id:int
     todo:str
 
 class TaskOut(BaseModel):
