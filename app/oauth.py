@@ -1,5 +1,5 @@
 from fastapi.security import OAuth2PasswordBearer
-from fastapi import Depends,status
+from fastapi import Depends,status,HTTPException
 from fastapi.responses import JSONResponse
 from jose import jwt,JWTError
 from .Config import ALGORITHM
@@ -14,18 +14,17 @@ def verify_token(token:str = Depends(oauth2_scheme)):
         user_id = payload.get("user_id")
         username=payload.get("username")
         if not user_id or not username:
-            return JSONResponse(
+            raise HTTPException(
                 status_code=status.HTTP_403_FORBIDDEN,
-                content={"message":"Invalid token payload"}
-            )
-        return JSONResponse(
-            content={"user_id":user_id,"username":username}
-        )
+                detail="Invalid token payload"
+                )
+        return {"user_id":user_id,"username":username}
+        
     except JWTError as e :
-        return JSONResponse(
+        raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            content={"message":"Token expired or invalid"},
-            headers={"WWW-Authenticate": "Bearer"}
+            detail="Token expired or invalid",
+            headers={"WWW-Authenticate": "Bearer"},
         )
 
 #def get_current_user(current_user= Depends(verify_token)):
