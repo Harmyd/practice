@@ -35,7 +35,7 @@ def get_task_for_user(id,current_user,db:Session):
             status_code=status.HTTP_401_UNAUTHORIZED,
             content={"message":"Authentication is required"}
         )
-    if current_user["id"] != id :
+    if current_user["user_id"] != id :
         return JSONResponse(
             status_code=status.HTTP_403_FORBIDDEN,
             content={"message":"You can only view your task"}
