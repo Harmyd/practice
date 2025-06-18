@@ -13,7 +13,7 @@ TaskRoute = APIRouter(
 
 @TaskRoute.post("/add_task",status_code=status.HTTP_201_CREATED,response_model=TaskOut)
 def taskcreate(request:TaskList,db:Session=Depends(get_db),current_user=Depends(verify_token)):
-    return Tasks.create_task(request,db)
+    return Tasks.create_task(request,current_user,db)
 
 @TaskRoute.get("/{id}",status_code=status.HTTP_200_OK,response_model=TaskOut)
 def get_task(id:int,db:Session=Depends(get_db),current_user=Depends(verify_token)):
