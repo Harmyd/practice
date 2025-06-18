@@ -13,7 +13,7 @@ def create_task(request,current_user:dict,db:Session):
     
     task_list=[]
     for task in request.Tasks:
-        new_task=models.Task(Content=task.todo,User_id=current_user[user_id])
+        new_task=models.Task(Content=task.todo,User_id=current_user["user_id"])
         db.add(new_task)
         db.commit()
         db.refresh(new_task)
@@ -35,7 +35,7 @@ def get_task_for_user(id,current_user,db:Session):
             status_code=status.HTTP_401_UNAUTHORIZED,
             content={"message":"Authentication is required"}
         )
-    if current_user[id] != id :
+    if current_user["id"] != id :
         return JSONResponse(
             status_code=status.HTTP_403_FORBIDDEN,
             content={"message":"You can only view your task"}
@@ -75,7 +75,7 @@ def edit_task(task_id,request,current_user:dict,db:Session):
             content={"message":"task does not exist"}
         )
     
-    if current_user.user_id != current_task.User_id:
+    if current_user["user_id"] != current_task.User_id:
         return JSONResponse(
             status_code=status.HTTP_401_UNAUTHORIZED,
             content={"message":"This user is not authorized to make changes"}
