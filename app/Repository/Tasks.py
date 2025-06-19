@@ -89,7 +89,7 @@ def edit_task(task_id,request,current_user,db:Session):
     )
 
 
-def delete_task(user_id,task_id,current_user,db:Session):
+def delete_task(task_id,user_id,current_user,db:Session):
     if not current_user:
          return JSONResponse(
             status_code=status.HTTP_401_UNAUTHORIZED,
