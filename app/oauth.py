@@ -5,11 +5,7 @@ from jose import jwt,JWTError
 from .Config import ALGORITHM
 
 
-oauth2_scheme= OAuth2PasswordBearer("https://practice-vdup.onrender.com/login")
-SECRET_KEY="WL2YXpgjYyFue6AL06H7fqxcoQylEk-96UTnb0KpWd0"
-
-def verify_token(token:str = Depends(oauth2_scheme)):
-    try:
+y:
         payload = jwt.decode(token,SECRET_KEY,algorithms=ALGORITHM)
         user_id = payload.get("user_id")
         username=payload.get("username")
@@ -29,3 +25,8 @@ def verify_token(token:str = Depends(oauth2_scheme)):
 
 #def get_current_user(current_user= Depends(verify_token)):
     
+oauth2_scheme= OAuth2PasswordBearer("https://practice-vdup.onrender.com/login")
+SECRET_KEY="WL2YXpgjYyFue6AL06H7fqxcoQylEk-96UTnb0KpWd0"
+
+def verify_token(token:str = Depends(oauth2_scheme)):
+    tr

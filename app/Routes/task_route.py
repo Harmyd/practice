@@ -21,7 +21,7 @@ def get_task(id:int,db:Session=Depends(get_db),current_user=Depends(verify_token
 
 @TaskRoute.put("/update_task/{task_id}",status_code=status.HTTP_200_OK,response_model=TaskOut)
 def update_task(task_id:int,request:TaskEdit,current_user=Depends(verify_token), db:Session=Depends(get_db)):
-    return Tasks.edit_task(task_id,current_user,request,db)
+    return Tasks.edit_task(task_id,request,current_user,db)
 
 @TaskRoute.delete("/delete_task/{task_id}",status_code=status.HTTP_200_OK)
 def delete_task(task_id:int,user_id:int,current_user=Depends(verify_token), db:Session=Depends(get_db)):
