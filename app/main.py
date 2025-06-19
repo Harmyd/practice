@@ -11,6 +11,7 @@ app=FastAPI()
 # CORS
 origin=[
    "http://localhost:3000",
+   "http://localhost:3001",
    "https://l6s56sqc-3000.uks1.devtunnels.ms",
    "https://formpractice-two.vercel.app"
 ]
