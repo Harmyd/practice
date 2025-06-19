@@ -9,7 +9,7 @@ def create_task(request,current_user:dict,db:Session):
         return JSONResponse(
             status_code=status.HTTP_401_UNAUTHORIZED,
             content={"message":"Authentication is required"}
-        )
+        ) 
     
     task_list=[]
     for task in request.Tasks:
@@ -60,7 +60,7 @@ def get_task_for_user(id,current_user,db:Session):
     )
 
 
-def edit_task(task_id,request,current_user:dict,db:Session):
+def edit_task(task_id,request,current_user,db:Session):
     if not current_user:
          return JSONResponse(
             status_code=status.HTTP_401_UNAUTHORIZED,
