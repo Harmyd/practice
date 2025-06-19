@@ -28,7 +28,7 @@ def signUp(request,db:Session):
                 status_code=status.HTTP_201_CREATED,
                 content={
                             "message":"Signed up successfully",
-                            "Token":create_access_token(data={"user_id":new_user.id,"username":new_user.Username}),
+                            "access_token":create_access_token(data={"user_id":new_user.id,"username":new_user.Username}),
                             "Token_type":"Bearer"
                          }
             )
